@@ -4,6 +4,10 @@ using namespace std;
 
 
 void rotate(vector<int>& arr, int index, int valueAtIndex, int rotateBy) {
+    if (rotateBy < 0) { 
+        cout << "Invalid rotate-by." << endl;
+        return;
+    }
     if (index >= arr.size())
         return;
 
