@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include "show-pset3.h"
 using namespace std;
 
 
@@ -16,7 +17,7 @@ struct node {
 };
 
 
-void insertNode(node **head, char v) {
+static void insertNode(node **head, char v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -32,7 +33,7 @@ void insertNode(node **head, char v) {
     }
 }
 
-void delNode(node *head, char data) {
+static void delNode(node *head, char data) {
     node *parent = NULL;
     while (head) {
         if (head->value == data) {
@@ -51,16 +52,14 @@ void delNode(node *head, char data) {
     delete head;
 }
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
     }
 }
 
-
-
-int main() {
+void showP18() {
     node *first = NULL;
 
     insertNode(&first, 'a');
@@ -71,6 +70,4 @@ int main() {
     delNode(first, 'c');
 
     printList(first);
-
-    return 0;
 }

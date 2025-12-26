@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include "show-pset3.h"
 using namespace std;
 
 
@@ -16,7 +17,7 @@ struct node {
 };
 
 
-void insertNode(node **head, int v) {
+static void insertNode(node **head, int v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -33,7 +34,7 @@ void insertNode(node **head, int v) {
 }
 
 
-void reverse(node *head) {
+static void reverse(node *head) {
     node *current = head;
     stack<int> s;
     while (current) {
@@ -126,7 +127,7 @@ node* addTwoNums(node *first, node *second) {
     return result;
 }
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -134,7 +135,7 @@ void printList(node *head) {
 }
 
 
-int main() {
+void showP19() {
     node *first = NULL;
     node *second = NULL;
 
@@ -150,6 +151,4 @@ int main() {
     node *result = addTwoNums(first, second);
     
     printList(result);
-
-    return 0;
 }

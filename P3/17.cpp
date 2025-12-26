@@ -1,9 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include "show-pset3.h"
 using namespace std;
-
-
 
 
 struct node {
@@ -17,8 +16,8 @@ struct node {
 };
 
 
-
-void insertNode(node **head, int v) {
+static void insertNode(node **head, int v) {
+    cout << "Adding: " << v << endl;
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -61,26 +60,7 @@ struct Queue {
         }
         return 0;
     }
-
-    // void add(int value) {
-    //     rear = rear % (totals);
-    //     v[rear] = value;
-    //     rear += 1;
-    //     if (rear == totals) {
-    //         rear--;
-    //     }
-    // }
 };
-
-
-struct ArrayView {
-    int start;
-    int end;
-    vector<int>& array;
-
-    ArrayView(vector<int>& v, int s, int e): start(s), end(e), array(v) {}
-};
-
 
 
 int finder(node *head, int nth) {
@@ -96,57 +76,19 @@ int finder(node *head, int nth) {
     }
 
     return parent->value;
-    // return q.v[0];
-}   
-
-void delNode(node *head, char data) {
-    node *parent = NULL;
-    while (head) {
-        if (head->value == data) {
-            break;
-        }
-        parent = head;
-        head = head->next;
-    }
-
-    // noed was not there
-    if (head == NULL) {
-        return;
-    }
-
-    parent->next = head->next;
-    delete head;
 }
 
 
-void removeDuplicates(node *head) {
-    unordered_set<char> visited;
-    node *parent = NULL;
-    while (head) {
-        if (visited.find(head->value) != visited.end()) {
-            node *temp = head->next;
-            parent->next = head->next;
-            delete head;
-            head = temp;
-            continue;
-        }
-
-        visited.insert(head->value);
-        parent = head;
-        head = head->next;
-    }
-}
-
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
     }
+    cout << endl;
 }
 
 
-
-int main() {
+void showP17() {
     node *first = NULL;
 
     insertNode(&first, 1);
@@ -155,9 +97,12 @@ int main() {
     insertNode(&first, 3);
     insertNode(&first, 4);
 
-    cout << finder(first,1) << endl;;
-
+    cout << "The list is: ";
     printList(first);
 
-    return 0;
+    cout << "nth: ";
+    int n;
+    cin >> n;
+
+    cout << finder(first, n) << endl;
 }

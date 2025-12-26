@@ -3,6 +3,9 @@
 using namespace std;
 
 
+#include "show-pset3.h"
+
+
 struct node {
     char value;
     node *next;
@@ -14,7 +17,8 @@ struct node {
 };
 
 
-void insertNode(node **head, char v) {
+static void insertNode(node **head, char v) {
+    cout << "Adding node: " << v << endl;
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -30,7 +34,7 @@ void insertNode(node **head, char v) {
     }
 }
 
-void delNode(node *head, char data) {
+static void delNode(node *head, char data) {
     node *parent = NULL;
     while (head) {
         if (head->value == data) {
@@ -50,7 +54,7 @@ void delNode(node *head, char data) {
 }
 
 
-void removeDuplicates(node *head) {
+static void removeDuplicates(node *head) {
     unordered_set<char> visited;
     node *parent = NULL;
     while (head) {
@@ -68,7 +72,7 @@ void removeDuplicates(node *head) {
     }
 }
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -85,26 +89,30 @@ void showP16() {
     insertNode(&first, 'd');
     insertNode(&first, 'b');
 
-    removeDuplicates(first);
-
+    cout << "Before: ";
     printList(first);
 
-    return;
-}
-
-
-int main() {
-    node *first = NULL;
-
-    insertNode(&first, 'a');
-    insertNode(&first, 'b');
-    insertNode(&first, 'c');
-    insertNode(&first, 'd');
-    insertNode(&first, 'b');
+    cout << endl;
 
     removeDuplicates(first);
 
+    cout << "After: ";
     printList(first);
-
-    return 0;
 }
+
+
+// int main() {
+//     node *first = NULL;
+
+//     insertNode(&first, 'a');
+//     insertNode(&first, 'b');
+//     insertNode(&first, 'c');
+//     insertNode(&first, 'd');
+//     insertNode(&first, 'b');
+
+//     removeDuplicates(first);
+
+//     printList(first);
+
+//     return 0;
+// }

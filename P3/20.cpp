@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_set>
+#include "show-pset3.h"
 using namespace std;
 
 struct node {
@@ -13,7 +14,7 @@ struct node {
 };
 
 
-void insertNode(node **head, char v) {
+static void insertNode(node **head, char v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -45,7 +46,7 @@ node* detectCycle(node *head) {
     return NULL;
 }
 
-int main() {
+void showP20() {
     node *head = NULL;
 
     insertNode(&head, 'a');
@@ -64,6 +65,4 @@ int main() {
     else {
         cout << "No cycles." << endl;
     }
-
-    return 0;
 }
