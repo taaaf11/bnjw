@@ -9,6 +9,6 @@ for folder in folders:
     cpp_files = [f for f in os.listdir('.') if f.endswith('.cpp')]
 
     for file in cpp_files:
-        run(f"gcc -c {file} -o o-files/{file}.o")
+        run(f"g++ -c {file} -o o-files/{file}.o")
         
     os.chdir("..")
