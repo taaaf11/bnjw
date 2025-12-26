@@ -3,8 +3,6 @@
 using namespace std;
 
 
-
-
 struct node {
     char value;
     node *next;
@@ -77,6 +75,22 @@ void printList(node *head) {
     }
 }
 
+
+void showP16() {
+    node *first = NULL;
+
+    insertNode(&first, 'a');
+    insertNode(&first, 'b');
+    insertNode(&first, 'c');
+    insertNode(&first, 'd');
+    insertNode(&first, 'b');
+
+    removeDuplicates(first);
+
+    printList(first);
+
+    return;
+}
 
 
 int main() {
