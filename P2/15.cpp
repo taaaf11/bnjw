@@ -1,10 +1,9 @@
 #include <iostream>
 #include <stack>
-#include <vector>
+#include "show-pset2.h"
 using namespace std;
 
 struct MinStack {
-    // vector<int> v;
     stack<int> s;
 
     void push(int value) {

@@ -1,9 +1,10 @@
 #include <iostream>
 #include <stack>
+#include "show-pset2.h"
 using namespace std;
 
 
-char getOpening(char closing) {
+static char getOpening(char closing) {
     if (closing == ')') {
         return '(';
     }
@@ -21,7 +22,7 @@ char getOpening(char closing) {
     }
 }
 
-char getClosing(char opening) {
+static char getClosing(char opening) {
     if (opening == '(') {
         return ')';
     }
@@ -39,11 +40,11 @@ char getClosing(char opening) {
     }
 }
 
-bool isBracket(char c) {
+static bool isBracket(char c) {
     return (getOpening(c) != 0) || (getClosing(c) != 0);
 }
 
-void paransChecker(string expr) {
+static void paransChecker(string expr) {
     stack<char> s;
 
     for (char c: expr) {

@@ -3,10 +3,11 @@
 #include <stack>
 #include <queue>
 #include <initializer_list>
+#include "show-pset2.h"
 using namespace std;
 
 
-void sortStack(int topValue, stack<int> &s) {
+static void sortStack(int topValue, stack<int> &s) {
     if (s.empty()) {
         s.push(topValue);
         return;
