@@ -6,44 +6,6 @@
 using namespace std;
 
 
-struct MyStack {
-    queue<int> q1;
-
-    void push(int v) {
-        q1.push(v);
-    }
-
-    int pop() {
-        queue<int> q2;
-
-        int toEnqueue;
-
-        while (!q1.empty()) {
-            toEnqueue = q1.front();
-            q1.pop();
-            
-            if (q1.empty()) {
-                break;
-            }
-
-            q2.push(toEnqueue);
-        }
-
-        while (!q2.empty()) {
-            q1.push(q2.front());
-            q2.pop();
-        }
-        
-        return toEnqueue;
-    }
-
-
-    bool empty() {
-        return q1.empty();
-    }
-};
-
-
 void sortStack(int topValue, stack<int> &s) {
     if (s.empty()) {
         s.push(topValue);
