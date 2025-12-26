@@ -1,7 +1,15 @@
 from subprocess import run
 import os
+import sys
 
-folders = "P1 P2 P3".split()
+
+if len(sys.argv) > 1:
+    folders = sys.argv[1:]
+else:
+    folders = "P1 P2 P3".split()
+
+# print(folders)
+# exit(1)
 
 for folder in folders:
     os.chdir(folder)
