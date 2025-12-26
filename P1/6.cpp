@@ -1,4 +1,5 @@
 #include <iostream>
+#include "show-pset1.h"
 using namespace std;
 
 
@@ -13,7 +14,7 @@ struct node {
 };
 
 
-void insertNode(node **head, char v) {
+static void insertNode(node **head, char v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -30,7 +31,7 @@ void insertNode(node **head, char v) {
 }
 
 
-bool algorithm(node *l) {
+static bool algorithm(node *l) {
     if (l == NULL) {
         return false;
     }
@@ -52,7 +53,7 @@ bool algorithm(node *l) {
     return false;
 }
 
-int main() {
+void showP6() {
     node *head = NULL;
 
     insertNode(&head, 'A');

@@ -1,4 +1,5 @@
 #include <iostream>
+#include "show-pset1.h"
 using namespace std;
 
 struct node {
@@ -92,7 +93,7 @@ struct Deque
     }
 };
 
-int main()
+void showP9()
 {
     Deque d;
 
@@ -107,6 +108,4 @@ int main()
     while (true) {
         cout << d.removeFront() << endl;
     }
-
-    return 0;
 }

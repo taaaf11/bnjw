@@ -1,4 +1,5 @@
 #include <iostream>
+#include "show-pset1.h"
 using namespace std;
 
 
@@ -12,7 +13,7 @@ struct node {
     }
 };
 
-void insertNode(node **head, int v) {
+static void insertNode(node **head, int v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -28,7 +29,7 @@ void insertNode(node **head, int v) {
     }
 }
 
-void createSorted(node *first, node *second) {
+static void createSorted(node *first, node *second) {
     node *parent = NULL;
 
     while (first) {
@@ -47,14 +48,14 @@ void createSorted(node *first, node *second) {
     }
 }
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
     }
 }
 
-int main() {
+void showP5() {
     node *first = NULL;
     node *second = NULL;
 
@@ -71,6 +72,4 @@ int main() {
 
     cout << "First list: ";
     printList(first);
-
-    return 0;
 }

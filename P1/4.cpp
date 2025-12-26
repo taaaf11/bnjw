@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <stack>
+#include "show-pset1.h"
 using namespace std;
 
 struct node {
@@ -14,7 +15,7 @@ struct node {
 };
 
 
-int getSize(node *head) {
+static int getSize(node *head) {
     int size = 0;
     while (head) {
         size++;
@@ -24,8 +25,7 @@ int getSize(node *head) {
     return size;
 }
 
-pair<node *, node *> midsplit(node *head, int size) {
-    // int sizeOfList = ;
+static pair<node *, node *> midsplit(node *head, int size) {
     node *current = head;
     node *secondPart = NULL;
     for (int i = 1; i <= ((size - 1) / 2); i++) {
@@ -43,7 +43,7 @@ pair<node *, node *> midsplit(node *head, int size) {
 }
 
 
-void insertNode(node **head, int v) {
+static void insertNode(node **head, int v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -59,7 +59,7 @@ void insertNode(node **head, int v) {
     }
 }
 
-void reverse(node *head) {
+static void reverse(node *head) {
     node *current = head;
     stack<int> s;
     while (current) {
@@ -74,7 +74,7 @@ void reverse(node *head) {
     }
 }
 
-bool compareLists(node *one, node *two) {
+static bool compareLists(node *one, node *two) {
     while (one && two) {
         if (one->value != two->value) {
             return false;
@@ -91,14 +91,14 @@ bool compareLists(node *one, node *two) {
 }
 
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
     }
 }
 
-int main() {
+void showP4() {
     node *head = NULL;
     int size = 5;
 
@@ -129,13 +129,6 @@ int main() {
 
     reverse(secondPart);
 
-
-
-
-    // if (secondStart != NULL) {
-    //     secondPart = secondStart;
-    // }
-
     cout << endl;
     cout << endl;
     cout << endl;
@@ -144,6 +137,4 @@ int main() {
     printList(secondPart);
     cout << endl;
     cout << compareLists(firstPart, secondPart) << endl;
-
-    return 0;
 }

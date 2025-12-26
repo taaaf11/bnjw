@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <optional>
+#include "show-pset1.h"
 using namespace std;
 
 struct node {
@@ -17,7 +16,7 @@ struct node {
 
 node *head = NULL;
 
-void insertNormal(int patient) {
+static void insertNormal(int patient) {
     node *newnode = new node(patient);
 
     if (!head) {
@@ -34,7 +33,7 @@ void insertNormal(int patient) {
     current->next = newnode;
 }
 
-void insertPriority(int patient, int priority) {
+static void insertPriority(int patient, int priority) {
     node *newnode = new node(patient, priority);
     if (!head) {
         head = newnode;
@@ -62,7 +61,7 @@ void insertPriority(int patient, int priority) {
 }
 
 
-int dequeue() {
+static int dequeue() {
     if (head == NULL) {
         throw runtime_error("No patients left in queue.");
     }
@@ -77,7 +76,7 @@ int dequeue() {
     return value;
 }
 
-int main() {
+void showP3() {
     insertNormal(1);
     insertNormal(2);
     insertNormal(3);
@@ -97,6 +96,4 @@ int main() {
             break;
         }
     }
-
-    return 0;
 }

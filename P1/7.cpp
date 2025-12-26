@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_set>
+#include "show-pset1.h"
 using namespace std;
 
 struct node {
@@ -12,7 +13,7 @@ struct node {
     }
 };
 
-void insertNode(node **head, int v) {
+static void insertNode(node **head, int v) {
     node *newnode = new node(v);
     if (*head == NULL) {
         *head = newnode;
@@ -29,7 +30,7 @@ void insertNode(node **head, int v) {
 }
 
 
-void removeConsecutives(node *head, int k) {
+static void removeConsecutives(node *head, int k) {
     int i = 0;
     node *parent = NULL;
     node *current = head;
@@ -68,14 +69,14 @@ void removeConsecutives(node *head, int k) {
 }
 
 
-void printList(node *head) {
+static void printList(node *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
     }
 }
 
-int main() {
+void showP7() {
     node *head = NULL;
 
     insertNode(&head, 1);
@@ -84,24 +85,8 @@ int main() {
     insertNode(&head, 0);
     insertNode(&head, 0);
     insertNode(&head, 0);
-    // insertNode(&head, 0);
+    insertNode(&head, 0);
     insertNode(&head, 1);
 
     removeConsecutives(head, 5);
-
-    printList(head);
-
-
-    // head->next->next->next->next->next = head->next->next;
-
-    // node *cycleDetect = detectCycle(head);
-
-    // if (cycleDetect) {
-    //     cout << "Cycle detected at: " << cycleDetect->value << endl;
-    // }
-    // else {
-    //     cout << "No cycles." << endl;
-    // }
-
-    return 0;
 }

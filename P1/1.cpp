@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "show-pset1.h"
 using namespace std;
 
 
@@ -26,7 +27,7 @@ void rotate(vector<int>& arr, int index, int valueAtIndex, int rotateBy) {
 }
 
 
-int main() {
+void showP1() {
     vector<int> array = {1, 2, 3, 4, 5};
 
     rotate(array, 0, array[0], 2);
@@ -34,5 +35,4 @@ int main() {
     for (int e: array) {
         cout << e << ", "; 
     }
-    return 0;
 }
