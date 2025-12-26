@@ -67,12 +67,10 @@ struct TrainBogies {
     }
 };
 
-int main() {
+void showP14() {
     TrainBogies t1{9, 5, 6, 1, 3};
 
     while (true) {
         cout << t1.dequeue() << endl;
     }
-
-    return 0;
 }

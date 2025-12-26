@@ -44,7 +44,7 @@ struct MinStack {
     }
 };
 
-int main() {
+void showP15() {
     MinStack ms;
 
     ms.push(2);
@@ -54,5 +54,4 @@ int main() {
     while (!ms.empty()) {
         cout << ms.pop() << endl;
     }
-    return 0;
 }

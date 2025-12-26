@@ -70,9 +70,8 @@ void paransChecker(string expr) {
 }
 
 
-int main() {
+void showP12() {
     string expr = "a{b(c]d}";
 
     paransChecker(expr);
-    return 0;
 }

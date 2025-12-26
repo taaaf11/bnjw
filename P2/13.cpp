@@ -43,7 +43,7 @@ struct MyStack {
     }
 };
 
-int main() {
+void showP13() {
     MyStack s;
 
     s.push(1);
@@ -54,6 +54,4 @@ int main() {
     while (!s.empty()) {
         cout << s.pop() << endl;
     }
-
-    return 0;
 }

@@ -36,7 +36,7 @@ void sortStack(int topValue, stack<int> &s) {
     }
 }
 
-int main() {
+void showP11() {
     stack<int> s;
 
     s.push(1);
@@ -52,6 +52,4 @@ int main() {
         cout << s.top() << endl;
         s.pop();
     }
-
-    return 0;
 }
