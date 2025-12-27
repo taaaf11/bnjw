@@ -16,8 +16,8 @@ objects :=  P3/16.o \
 			P1/7.o \
 			P1/9.o
 
-main.exe: $(objects)
-	g++ $^ main.cpp -o main.exe
+main.exe: $(objects) main.cpp
+	g++ $^ -o main.exe
 
 $(objects): %.o : %.cpp
 	g++ -c $^ -o $@
