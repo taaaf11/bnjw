@@ -49,8 +49,11 @@ void showP13() {
     s.push(2);
     s.push(3);
     s.push(4);
+    cout << "Pushed: 1, 2, 3, 4" << endl;
 
+    cout << "Popped: ";
     while (!s.empty()) {
-        cout << s.pop() << endl;
+        cout << s.pop() << ", ";
     }
+    cout << endl;
 }

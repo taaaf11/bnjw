@@ -149,6 +149,7 @@ void showP19() {
     insertNode(&second, 2);
 
     nodeP19 *result = addTwoNums(first, second);
-    
+
+    cout << "After adding 9913 and 295 (reversed): "<<endl;;
     printList(result);
 }

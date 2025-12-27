@@ -68,8 +68,15 @@ void showP5() {
     insertNode(&second, 3);
     insertNode(&second, 4);
 
-    createSorted(first, second);
-
     cout << "First list: ";
     printList(first);
+    cout << endl << "Second list: ";
+    printList(second);
+
+    
+    createSorted(first, second);
+
+    cout << endl << "Sorted: ";
+    printList(first);
+    cout << endl;
 }

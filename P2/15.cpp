@@ -49,8 +49,11 @@ void showP15() {
     ms.push(2);
     ms.push(3);
     ms.push(4);
+    cout << "Pushed: 2, 3, 4" << endl;
 
+    cout << "Popped: ";
     while (!ms.empty()) {
-        cout << ms.pop() << endl;
+        cout << ms.pop() << ", ";
     }
+    cout << endl;
 }

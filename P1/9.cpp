@@ -105,11 +105,8 @@ void showP9()
     Deque d;
 
     d.insertFront(1);
-    d.insertFront(2);
-    d.insertFront(3);
     d.insertFront(4);
     d.insertRear(7);
-    d.insertRear(6);
     d.insertRear(5);
     
     while (true) {

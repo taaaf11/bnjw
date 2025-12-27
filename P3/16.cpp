@@ -18,7 +18,7 @@ struct nodeP16 {
 
 
 static void insertNode(nodeP16 **head, char v) {
-    cout << "Adding nodeP16: " << v << endl;
+    cout << "Adding node: " << v << endl;
     nodeP16 *newnode = new nodeP16(v);
     if (*head == NULL) {
         *head = newnode;

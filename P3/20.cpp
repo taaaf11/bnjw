@@ -55,6 +55,8 @@ void showP20() {
     insertNode(&head, 'd');
     insertNode(&head, 'e');
 
+    cout << "The list is: " << "A -> " << "B -> " << "C -> " << "D -> " << "E -> " << "C -> ..." << endl;
+
     head->next->next->next->next->next = head->next->next;
 
     nodeP20 *cycleDetect = detectCycle(head);

@@ -67,6 +67,8 @@ void showP6() {
 
     bool hasCycles = algorithm(head);
 
+    cout << "The list is: " << "A -> " << "B -> " << "C -> " << "D -> " << "E -> " << "C -> ..." << endl;
+
     if (hasCycles) {
         cout << "The cycle is detected." << endl;
     }

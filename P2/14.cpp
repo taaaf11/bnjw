@@ -20,8 +20,7 @@ struct TrainBogies {
         stack<int> s;
 
         if (q1.empty()) {
-            cout << "Empty." << endl;
-            exit(1);
+            throw runtime_error("Train queue is empty.");
         }
 
         int min = q1.front();
@@ -70,7 +69,15 @@ struct TrainBogies {
 void showP14() {
     TrainBogies t1{9, 5, 6, 1, 3};
 
+    cout << "Original queue: 9, 5, 6, 1, 3" << endl;
+    cout << "Dequeue order: ";
     while (true) {
-        cout << t1.dequeue() << endl;
+        try {
+            cout << t1.dequeue() << ", ";
+        }
+        catch (...) {
+            break;
+        }
     }
+    cout << endl;
 }

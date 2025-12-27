@@ -30,8 +30,14 @@ static void rotate(vector<int>& arr, int index, int valueAtIndex, int rotateBy) 
 void showP1() {
     vector<int> array = {1, 2, 3, 4, 5};
 
+    cout << "Original array: ";
+    for (int e: array) {
+        cout << e << ", "; 
+    }
+
     rotate(array, 0, array[0], 2);
     
+    cout << endl << "After Rotated right by 2: ";
     for (int e: array) {
         cout << e << ", "; 
     }

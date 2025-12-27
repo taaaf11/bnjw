@@ -73,6 +73,7 @@ static void paransChecker(string expr) {
 
 void showP12() {
     string expr = "a{b(c]d}";
-
+    cout << "Original expression: " << expr << endl;
+    cout << "While parsing: ";
     paransChecker(expr);
 }

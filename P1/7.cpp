@@ -93,6 +93,6 @@ void showP7() {
 
     removeConsecutives(head, 5);
 
-    cout << endl << "After: ";
+    cout << endl << "After removing 5 consecutive absents: ";
     printList(head);
 }

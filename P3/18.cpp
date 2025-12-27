@@ -78,6 +78,6 @@ void showP18() {
     
     delNode(first);
 
-    cout << endl << "After: ";
+    cout << endl << "After deleting c: ";
     printList(first);
 }

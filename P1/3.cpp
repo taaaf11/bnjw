@@ -80,14 +80,9 @@ static int dequeue() {
 
 void showP3() {
     insertNormal(1);
-    insertNormal(2);
-    insertNormal(3);
     insertPriority(10, 1);
-    insertPriority(20, 1);
-    insertPriority(30, 1);
     insertPriority(100, 2);
     insertPriority(200, 2);
-    insertPriority(300, 2);
 
     cout << "Dequeueing" << endl;
     while (true) {

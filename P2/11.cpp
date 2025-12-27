@@ -44,13 +44,16 @@ void showP11() {
     s.push(4);
     s.push(3);
     s.push(5);
+    cout << "Pushed: 1, 4, 3, 5" << endl;
 
     int v = s.top();
     s.pop();
     sortStack(v, s);
 
+    cout << "Popped: ";
     while (!s.empty()) {
-        cout << s.top() << endl;
+        cout << s.top() << ", ";
         s.pop();
     }
+    cout << endl;
 }
