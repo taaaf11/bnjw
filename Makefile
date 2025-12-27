@@ -21,3 +21,8 @@ main.exe: $(objects)
 
 $(objects): %.o : %.cpp
 	g++ -c $^ -o $@
+
+clean:
+	rm P1/*.o
+	rm P2/*.o
+	rm P3/*.o
