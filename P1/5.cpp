@@ -3,25 +3,25 @@
 using namespace std;
 
 
-struct node {
+struct nodeP5 {
     int value;
-    node *next;
+    nodeP5 *next;
 
-    node(int v) {
+    nodeP5(int v) {
         value = v;
         next = NULL;
     }
 };
 
-static void insertNode(node **head, int v) {
-    node *newnode = new node(v);
+static void insertNode(nodeP5 **head, int v) {
+    nodeP5 *newnode = new nodeP5(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP5 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -29,12 +29,12 @@ static void insertNode(node **head, int v) {
     }
 }
 
-static void createSorted(node *first, node *second) {
-    node *parent = NULL;
+static void createSorted(nodeP5 *first, nodeP5 *second) {
+    nodeP5 *parent = NULL;
 
     while (first) {
         while (second && second->value < first->value) {
-            node *temp = second->next;
+            nodeP5 *temp = second->next;
 
             second->next = first;
             parent->next = second;
@@ -48,7 +48,7 @@ static void createSorted(node *first, node *second) {
     }
 }
 
-static void printList(node *head) {
+static void printList(nodeP5 *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -56,8 +56,8 @@ static void printList(node *head) {
 }
 
 void showP5() {
-    node *first = NULL;
-    node *second = NULL;
+    nodeP5 *first = NULL;
+    nodeP5 *second = NULL;
 
     insertNode(&first, 1);
     insertNode(&first, 5);

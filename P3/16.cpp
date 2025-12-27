@@ -6,27 +6,27 @@ using namespace std;
 #include "show-pset3.h"
 
 
-struct node {
+struct nodeP16 {
     char value;
-    node *next;
+    nodeP16 *next;
 
-    node(char v) {
+    nodeP16(char v) {
         value = v;
         next = NULL;
     }
 };
 
 
-static void insertNode(node **head, char v) {
-    cout << "Adding node: " << v << endl;
-    node *newnode = new node(v);
+static void insertNode(nodeP16 **head, char v) {
+    cout << "Adding nodeP16: " << v << endl;
+    nodeP16 *newnode = new nodeP16(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP16 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -34,8 +34,8 @@ static void insertNode(node **head, char v) {
     }
 }
 
-static void delNode(node *head, char data) {
-    node *parent = NULL;
+static void delNode(nodeP16 *head, char data) {
+    nodeP16 *parent = NULL;
     while (head) {
         if (head->value == data) {
             break;
@@ -54,12 +54,12 @@ static void delNode(node *head, char data) {
 }
 
 
-static void removeDuplicates(node *head) {
+static void removeDuplicates(nodeP16 *head) {
     unordered_set<char> visited;
-    node *parent = NULL;
+    nodeP16 *parent = NULL;
     while (head) {
         if (visited.find(head->value) != visited.end()) {
-            node *temp = head->next;
+            nodeP16 *temp = head->next;
             parent->next = head->next;
             delete head;
             head = temp;
@@ -72,7 +72,7 @@ static void removeDuplicates(node *head) {
     }
 }
 
-static void printList(node *head) {
+static void printList(nodeP16 *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -81,7 +81,7 @@ static void printList(node *head) {
 
 
 void showP16() {
-    node *first = NULL;
+    nodeP16 *first = NULL;
 
     insertNode(&first, 'a');
     insertNode(&first, 'b');
@@ -102,7 +102,7 @@ void showP16() {
 
 
 // int main() {
-//     node *first = NULL;
+//     nodeP16 *first = NULL;
 
 //     insertNode(&first, 'a');
 //     insertNode(&first, 'b');

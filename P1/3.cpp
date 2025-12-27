@@ -2,29 +2,30 @@
 #include "show-pset1.h"
 using namespace std;
 
-struct node {
+struct nodeP3 {
     int patient;
     int priority;
-    node *next;
+    nodeP3 *next;
 
-    node(int pat, int pri = -1) {
+    nodeP3(int pat, int pri = -1) {
         patient = pat;
         priority = pri;
         next = NULL;
     }    
 };
 
-node *head = NULL;
+nodeP3 *head = NULL;
 
 static void insertNormal(int patient) {
-    node *newnode = new node(patient);
+    cout << "Inserting normal: " << patient << endl;
+    nodeP3 *newnode = new nodeP3(patient);
 
     if (!head) {
         head = newnode;
         return;
     }
     
-    node *current = head;
+    nodeP3 *current = head;
 
     while (current->next) {
         current = current->next;
@@ -34,7 +35,8 @@ static void insertNormal(int patient) {
 }
 
 static void insertPriority(int patient, int priority) {
-    node *newnode = new node(patient, priority);
+    cout << "Inserting " << patient << " with priority " << priority << endl;
+    nodeP3 *newnode = new nodeP3(patient, priority);
     if (!head) {
         head = newnode;
         return;
@@ -45,7 +47,7 @@ static void insertPriority(int patient, int priority) {
         return;
     }
 
-    node *current = head;
+    nodeP3 *current = head;
 
     while (current && current->next && current->next->priority >= priority) {
         // if (current->priority < priority) {
@@ -57,7 +59,7 @@ static void insertPriority(int patient, int priority) {
     newnode->next = current->next;
     current->next = newnode;
 
-    // node *newnode = new node(patient, priority);
+    // nodeP3 *newnode = new nodeP3(patient, priority);
 }
 
 
@@ -66,7 +68,7 @@ static int dequeue() {
         throw runtime_error("No patients left in queue.");
     }
 
-    node *temp = head;
+    nodeP3 *temp = head;
 
     int value = temp->patient;
     head = head->next;
@@ -87,6 +89,7 @@ void showP3() {
     insertPriority(200, 2);
     insertPriority(300, 2);
 
+    cout << "Dequeueing" << endl;
     while (true) {
         try {
             cout << dequeue() << endl;

@@ -3,26 +3,26 @@
 #include "show-pset3.h"
 using namespace std;
 
-struct node {
+struct nodeP20 {
     char value;
-    node *next;
+    nodeP20 *next;
 
-    node(char v) {
+    nodeP20(char v) {
         value = v;
         next = NULL;
     }
 };
 
 
-static void insertNode(node **head, char v) {
-    node *newnode = new node(v);
+static void insertNode(nodeP20 **head, char v) {
+    nodeP20 *newnode = new nodeP20(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP20 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -31,7 +31,7 @@ static void insertNode(node **head, char v) {
 }
 
 
-node* detectCycle(node *head) {
+nodeP20* detectCycle(nodeP20 *head) {
     unordered_set<char> visited;
 
     while (head) {
@@ -47,7 +47,7 @@ node* detectCycle(node *head) {
 }
 
 void showP20() {
-    node *head = NULL;
+    nodeP20 *head = NULL;
 
     insertNode(&head, 'a');
     insertNode(&head, 'b');
@@ -57,7 +57,7 @@ void showP20() {
 
     head->next->next->next->next->next = head->next->next;
 
-    node *cycleDetect = detectCycle(head);
+    nodeP20 *cycleDetect = detectCycle(head);
 
     if (cycleDetect) {
         cout << "Cycle detected at: " << cycleDetect->value << endl;

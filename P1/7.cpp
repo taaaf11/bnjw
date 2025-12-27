@@ -3,25 +3,25 @@
 #include "show-pset1.h"
 using namespace std;
 
-struct node {
+struct nodeP7 {
     int value;
-    node *next;
+    nodeP7 *next;
 
-    node(int v) {
+    nodeP7(int v) {
         value = v;
         next = NULL;
     }
 };
 
-static void insertNode(node **head, int v) {
-    node *newnode = new node(v);
+static void insertNode(nodeP7 **head, int v) {
+    nodeP7 *newnode = new nodeP7(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP7 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -30,11 +30,11 @@ static void insertNode(node **head, int v) {
 }
 
 
-static void removeConsecutives(node *head, int k) {
+static void removeConsecutives(nodeP7 *head, int k) {
     int i = 0;
-    node *parent = NULL;
-    node *current = head;
-    node *seqStart = NULL;
+    nodeP7 *parent = NULL;
+    nodeP7 *current = head;
+    nodeP7 *seqStart = NULL;
 
     while (current) {
         if (current->value == 0) {
@@ -69,7 +69,7 @@ static void removeConsecutives(node *head, int k) {
 }
 
 
-static void printList(node *head) {
+static void printList(nodeP7 *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -77,7 +77,7 @@ static void printList(node *head) {
 }
 
 void showP7() {
-    node *head = NULL;
+    nodeP7 *head = NULL;
 
     insertNode(&head, 1);
     insertNode(&head, 1);
@@ -87,6 +87,12 @@ void showP7() {
     insertNode(&head, 0);
     insertNode(&head, 0);
     insertNode(&head, 1);
+
+    cout << "Before: ";
+    printList(head);
 
     removeConsecutives(head, 5);
+
+    cout << endl << "After: ";
+    printList(head);
 }

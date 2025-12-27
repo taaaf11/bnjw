@@ -6,26 +6,26 @@ using namespace std;
 
 
 
-struct node {
+struct nodeP19 {
     int value;
-    node *next;
+    nodeP19 *next;
 
-    node(int v) {
+    nodeP19(int v) {
         value = v;
         next = NULL;
     }
 };
 
 
-static void insertNode(node **head, int v) {
-    node *newnode = new node(v);
+static void insertNode(nodeP19 **head, int v) {
+    nodeP19 *newnode = new nodeP19(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP19 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -34,8 +34,8 @@ static void insertNode(node **head, int v) {
 }
 
 
-static void reverse(node *head) {
-    node *current = head;
+static void reverse(nodeP19 *head) {
+    nodeP19 *current = head;
     stack<int> s;
     while (current) {
         s.push(current->value);
@@ -50,7 +50,7 @@ static void reverse(node *head) {
 }
 
 
-node* addTwoNums(node *first, node *second) {
+nodeP19* addTwoNums(nodeP19 *first, nodeP19 *second) {
     reverse(first);
     reverse(second);
 
@@ -58,7 +58,7 @@ node* addTwoNums(node *first, node *second) {
     stack<int> expr1Stack;
     stack<int> expr2Stack;
 
-    node *curr = first;
+    nodeP19 *curr = first;
     while (curr) {
         expr1Stack.push(curr->value);
         curr=curr->next;
@@ -109,7 +109,7 @@ node* addTwoNums(node *first, node *second) {
         resultStack.push(carry);
     }
 
-    node *result = NULL;
+    nodeP19 *result = NULL;
     stack<int> auxStack;
     
     while (!resultStack.empty())
@@ -127,7 +127,7 @@ node* addTwoNums(node *first, node *second) {
     return result;
 }
 
-static void printList(node *head) {
+static void printList(nodeP19 *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -136,8 +136,8 @@ static void printList(node *head) {
 
 
 void showP19() {
-    node *first = NULL;
-    node *second = NULL;
+    nodeP19 *first = NULL;
+    nodeP19 *second = NULL;
 
     insertNode(&first, 3);
     insertNode(&first, 1);
@@ -148,7 +148,7 @@ void showP19() {
     insertNode(&second, 9);
     insertNode(&second, 2);
 
-    node *result = addTwoNums(first, second);
+    nodeP19 *result = addTwoNums(first, second);
     
     printList(result);
 }

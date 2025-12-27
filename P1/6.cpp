@@ -3,26 +3,26 @@
 using namespace std;
 
 
-struct node {
+struct nodeP6 {
     char value;
-    node *next;
+    nodeP6 *next;
 
-    node(char v) {
+    nodeP6(char v) {
         value = v;
         next = NULL;
     }
 };
 
 
-static void insertNode(node **head, char v) {
-    node *newnode = new node(v);
+static void insertNode(nodeP6 **head, char v) {
+    nodeP6 *newnode = new nodeP6(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP6 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -31,13 +31,13 @@ static void insertNode(node **head, char v) {
 }
 
 
-static bool algorithm(node *l) {
+static bool algorithm(nodeP6 *l) {
     if (l == NULL) {
         return false;
     }
 
-    node *tortoise = l;
-    node *hare = l;
+    nodeP6 *tortoise = l;
+    nodeP6 *hare = l;
 
     while (hare && hare->next) {
         if (hare == tortoise) {
@@ -54,7 +54,7 @@ static bool algorithm(node *l) {
 }
 
 void showP6() {
-    node *head = NULL;
+    nodeP6 *head = NULL;
 
     insertNode(&head, 'A');
     insertNode(&head, 'B');

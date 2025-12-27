@@ -5,27 +5,27 @@
 using namespace std;
 
 
-struct node {
+struct nodeP17 {
     int value;
-    node *next;
+    nodeP17 *next;
 
-    node(int v) {
+    nodeP17(int v) {
         value = v;
         next = NULL;
     }
 };
 
 
-static void insertNode(node **head, int v) {
+static void insertNode(nodeP17 **head, int v) {
     cout << "Adding: " << v << endl;
-    node *newnode = new node(v);
+    nodeP17 *newnode = new nodeP17(v);
     if (*head == NULL) {
         *head = newnode;
         return;
     }
 
     else {
-        node *current = *head;
+        nodeP17 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -43,9 +43,9 @@ struct Queue {
         this->totals = totals;
     }
 
-    int add(node *curr) {
+    int add(nodeP17 *curr) {
         int count = 0;
-        node *getSize = curr;
+        nodeP17 *getSize = curr;
         while (getSize) {
             count++;
             getSize=getSize->next;
@@ -63,9 +63,9 @@ struct Queue {
 };
 
 
-int finder(node *head, int nth) {
+int finder(nodeP17 *head, int nth) {
     Queue q(nth);
-    node *parent = NULL;
+    nodeP17 *parent = NULL;
     while (head) {
         if (q.add(head) != 0) {
             break;
@@ -79,7 +79,7 @@ int finder(node *head, int nth) {
 }
 
 
-static void printList(node *head) {
+static void printList(nodeP17 *head) {
     while (head) {
         cout << head->value << " -> ";
         head=head->next;
@@ -89,7 +89,7 @@ static void printList(node *head) {
 
 
 void showP17() {
-    node *first = NULL;
+    nodeP17 *first = NULL;
 
     insertNode(&first, 1);
     insertNode(&first, 5);

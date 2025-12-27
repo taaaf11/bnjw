@@ -1,14 +1,17 @@
 #include <iostream>
-#include "show-pset3.h"
+#include <stack>
+#include "show-pset1.h"
 using namespace std;
 
 
-struct nodeP18 {
+
+
+struct nodeP8 {
     char value;
-    nodeP18 *next;
+    nodeP8 *next;
     bool deleted;
 
-    nodeP18(char v) {
+    nodeP8(char v) {
         value = v;
         next = NULL;
         deleted = false;
@@ -16,15 +19,15 @@ struct nodeP18 {
 };
 
 
-
-static void insertNode(nodeP18 **head, char v) {
-    nodeP18 *newnode = new nodeP18(v);
+static void insertNode(nodeP8 **head, char v) {
+    nodeP8 *newnode = new nodeP8(v);
     if (*head == NULL) {
         *head = newnode;
+        return;
     }
 
     else {
-        nodeP18 *current = *head;
+        nodeP8 *current = *head;
         while (current->next) {
             current = current->next;
         }
@@ -32,8 +35,8 @@ static void insertNode(nodeP18 **head, char v) {
     }
 }
 
-// static void delNode(nodeP18 *head, char data) {
-//     nodeP18 *parent = NULL;
+// static void delNode(nodeP8 *head, char data) {
+//     nodeP8 *parent = NULL;
 //     while (head) {
 //         if (head->value == data) {
 //             break;
@@ -51,11 +54,26 @@ static void insertNode(nodeP18 **head, char v) {
 //     delete head;
 // }
 
-static void delNode(nodeP18 *no) {
-    no->deleted = true;
+static void delNode(nodeP8 *n) {
+    if (n->next) {
+        nodeP8 *parent = n;
+        nodeP8 *temp = n->next;
+        while (temp) {
+            if (temp->next  == NULL) {
+                n->next = NULL;
+            }
+            n->value = temp->value;
+            n = temp;
+            temp = temp->next;
+            parent = parent->next;
+        }
+    }
+    else { // the noed is tail
+        n->deleted = true;
+    }
 }
 
-static void printList(nodeP18 *head) {
+static void printList(nodeP8 *head) {
     while (head) {
         if (head->deleted == false) {
             cout << head->value << " -> ";
@@ -64,20 +82,15 @@ static void printList(nodeP18 *head) {
     }
 }
 
-void showP18() {
-    nodeP18 *first = NULL;
-    
+void showP8() {
+    nodeP8 *first = NULL;
+
     insertNode(&first, 'a');
     insertNode(&first, 'b');
     insertNode(&first, 'c');
     insertNode(&first, 'd');
-    insertNode(&first, 'e');
 
-    cout << "original: ";
-    printList(first);
-    
     delNode(first);
 
-    cout << endl << "After: ";
     printList(first);
 }
