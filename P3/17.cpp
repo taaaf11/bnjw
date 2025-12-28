@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <unordered_set>
 #include "show-pset3.h"
 using namespace std;
 
@@ -33,49 +31,36 @@ static void insertNode(nodeP17 **head, int v) {
     }
 }
 
-struct Queue {
-    vector<int> v;
-    int rear, totals;
 
-    Queue(int totals) {
-        rear = 0;
-        v.assign(totals, -1);
-        this->totals = totals;
+int getSize(nodeP17 *head) {
+    int count = 0;
+    while (head) {
+        count++;
+        head = head->next;
     }
-
-    int add(nodeP17 *curr) {
-        int count = 0;
-        nodeP17 *getSize = curr;
-        while (getSize) {
-            count++;
-            getSize=getSize->next;
-        }
-        if (count < totals) {
-            return -1;
-        }
-        
-        for (int i = 0; i < totals; i++) {
-            v[i] = curr->value;
-            curr =curr->next;
-        }
-        return 0;
-    }
-};
+    return count;
+}
 
 
 int finder(nodeP17 *head, int nth) {
-    Queue q(nth);
-    nodeP17 *parent = NULL;
+    int totalSize = getSize(head);
+    
+    if (nth > totalSize || nth <= 0) {
+        throw runtime_error("Invalid value for n.");
+    }
+
+    totalSize--;
+
     while (head) {
-        if (q.add(head) != 0) {
+        if (totalSize < nth) {
             break;
         }
 
-        parent = head;
         head = head->next;
+        totalSize--;
     }
 
-    return parent->value;
+    return head->value;
 }
 
 
