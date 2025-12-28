@@ -4,8 +4,6 @@
 using namespace std;
 
 
-
-
 struct nodeP8 {
     char value;
     nodeP8 *next;
@@ -55,22 +53,7 @@ static void insertNode(nodeP8 **head, char v) {
 // }
 
 static void delNode(nodeP8 *n) {
-    if (n->next) {
-        nodeP8 *parent = n;
-        nodeP8 *temp = n->next;
-        while (temp) {
-            if (temp->next  == NULL) {
-                n->next = NULL;
-            }
-            n->value = temp->value;
-            n = temp;
-            temp = temp->next;
-            parent = parent->next;
-        }
-    }
-    else { // the noed is tail
-        n->deleted = true;
-    }
+    n->deleted = true;
 }
 
 static void printList(nodeP8 *head) {
@@ -90,7 +73,7 @@ void showP8() {
     insertNode(&first, 'c');
     insertNode(&first, 'd');
 
-    delNode(first);
+    delNode(first->next->next->next);
 
     printList(first);
 }
