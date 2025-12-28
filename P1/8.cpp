@@ -33,28 +33,11 @@ static void insertNode(nodeP8 **head, char v) {
     }
 }
 
-// static void delNode(nodeP8 *head, char data) {
-//     nodeP8 *parent = NULL;
-//     while (head) {
-//         if (head->value == data) {
-//             break;
-//         }
-//         parent = head;
-//         head = head->next;
-//     }
-
-//     // noed was not there
-//     if (head == NULL) {
-//         return;
-//     }
-
-//     parent->next = head->next;
-//     delete head;
-// }
 
 static void delNode(nodeP8 *n) {
     n->deleted = true;
 }
+
 
 static void printList(nodeP8 *head) {
     while (head) {

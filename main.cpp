@@ -52,9 +52,15 @@ int main() {
             case 7:
                 showP7();
                 break;
+            case 8:
+                showP8();
+                break;
             case 9:
                 showP9();
                 break;
+            // case 10:
+            //     showP10();
+            //     break;
             case 11:
                 showP11();
                 break;
