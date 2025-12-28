@@ -32,27 +32,30 @@ static void insertNode(nodeP18 **head, char v) {
     }
 }
 
-// static void delNode(nodeP18 *head, char data) {
-//     nodeP18 *parent = NULL;
-//     while (head) {
-//         if (head->value == data) {
-//             break;
-//         }
-//         parent = head;
-//         head = head->next;
-//     }
 
-//     // noed was not there
-//     if (head == NULL) {
-//         return;
-//     }
+static void delNode(nodeP18 *n) {
+    if (n->next == NULL) {
+        throw runtime_error("Node not in middle of list.");
+    }
 
-//     parent->next = head->next;
-//     delete head;
-// }
+    nodeP18 *curr = n->next;
+    while (curr) {
+        // this will occur when curr is last node
+        // then, n will be second last node.
+        // we delete the curr node, and set n->next to NULL.
+        if (curr->next == NULL) {
+            // cout << "curr next null occured" << endl;
+            delete curr;
+            n->next = NULL;
+        }
 
-static void delNode(nodeP18 *no) {
-    no->deleted = true;
+        // else, we copy values from next nodes
+        // to currents nodes.
+        n->value = curr->value;
+
+        n = n->next;
+        curr = curr->next;
+    }
 }
 
 static void printList(nodeP18 *head) {
@@ -76,7 +79,7 @@ void showP18() {
     cout << "original: ";
     printList(first);
     
-    delNode(first);
+    delNode(first->next->next);
 
     cout << endl << "After deleting c: ";
     printList(first);
