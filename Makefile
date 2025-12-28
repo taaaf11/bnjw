@@ -14,7 +14,9 @@ objects :=  P3/16.o \
 			P1/5.o \
 			P1/6.o \
 			P1/7.o \
-			P1/9.o
+			P1/8.o \
+			P1/9.o \
+			P1/10.o
 
 main.exe: $(objects) main.cpp
 	g++ $^ -o main.exe
