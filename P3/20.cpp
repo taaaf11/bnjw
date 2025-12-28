@@ -32,14 +32,14 @@ static void insertNode(nodeP20 **head, char v) {
 
 
 nodeP20* detectCycle(nodeP20 *head) {
-    unordered_set<char> visited;
+    unordered_set<nodeP20 *> visited;
 
     while (head) {
-        if (visited.find(head->value) != visited.end()) {
+        if (visited.find(head) != visited.end()) {
             return head;
         }
 
-        visited.insert(head->value);
+        visited.insert(head);
         head = head->next;
     }
 
