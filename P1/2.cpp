@@ -33,7 +33,7 @@ static int putNegativesInPlace(vector<int>& arr) {
     return swapsRequired;
 }
 
-int main() {
+void showP2() {
     vector<int> arr = {1, 7, -5, 9, -12, 15};
 
     cout << "Original array: ";
@@ -44,11 +44,10 @@ int main() {
 
     int swapsRequired = putNegativesInPlace(arr);
 
-    cout << endl << "Sorted array: ";
+    cout << endl << "Sorted array:  ";
     for (int e: arr) {
         cout << e << ", ";
     }
 
     cout << endl  << "Swaps required: " << swapsRequired << endl;
-    return 0;
 }

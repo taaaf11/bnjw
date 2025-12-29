@@ -37,6 +37,9 @@ int main() {
             case 1:
                 showP1();
                 break;
+            case 2:
+                showP2();
+                break;
             case 3:
                 showP3();
                 break;
@@ -58,9 +61,9 @@ int main() {
             case 9:
                 showP9();
                 break;
-            // case 10:
-            //     showP10();
-            //     break;
+            case 10:
+                showP10();
+                break;
             case 11:
                 showP11();
                 break;
