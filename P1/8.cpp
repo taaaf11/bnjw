@@ -24,8 +24,31 @@ static void insertNode(nodeP8 **head, char v) {
     }
 
     else {
+        nodeP8 *parent = NULL;
         nodeP8 *current = *head;
         while (current->next) {
+            if (current->deleted) {
+                if (current == *head) {
+                    if ((*head)->next) {
+                        nodeP8 *temp = (*head)->next;
+                        delete *head;
+                        *head = temp;
+                    }
+                    else {
+                        head = NULL;
+                        delete current;
+                        *head = newnode;
+                    }
+                }
+                else {
+                    nodeP8 *temp = current->next;
+                    parent->next = current->next;
+                    current = temp;
+                    delete current;
+                }
+            }
+
+            parent = current;
             current = current->next;
         }
         current->next = newnode;
@@ -34,7 +57,29 @@ static void insertNode(nodeP8 **head, char v) {
 
 
 static void delNode(nodeP8 *n) {
-    n->deleted = true;
+    if (n->next) {
+        nodeP8 *curr = n->next;
+        while (curr) {
+            // this will occur when curr is last node
+            // then, n will be second last node.
+            // we delete the curr node, and set n->next to NULL.
+            if (curr->next == NULL) {
+                // cout << "curr next null occured" << endl;
+                delete curr;
+                n->next = NULL;
+            }
+
+            // else, we copy values from next nodes
+            // to currents nodes.
+            n->value = curr->value;
+
+            n = n->next;
+            curr = curr->next;
+        }
+    }
+    else {
+        n->deleted = true;
+    }
 }
 
 
