@@ -3,134 +3,120 @@
 using namespace std;
 
 
-class nodeP10 {
-  public:
-    int value;
-    nodeP10 *next;
+struct nodeP10 {
+    int data;
+    nodeP10* next;
 
-    nodeP10(int x) {
-        value = x;
-        next = NULL;
-    }
+    nodeP10(int d) : data(d), next(nullptr) {}
 };
 
 
+void insertFun(nodeP10*& head, int d)
+{
+    nodeP10* newNode = new nodeP10(d);
 
-static void insertNode(nodeP10 **head, char v) {
-    nodeP10 *newnode = new nodeP10(v);
-    if (*head == NULL) {
-        *head = newnode;
+    if (!head)
+    {
+        head = newNode;
         return;
     }
 
-    else {
-        nodeP10 *current = *head;
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newnode;
-    }
+    nodeP10* temp = head;
+    while (temp->next)
+        temp = temp->next;
+
+    temp->next = newNode;
 }
 
-
-
-static void printList(nodeP10 *head) {
-    nodeP10 *curr = head;
-    while (curr) {
-        cout << curr->value << " -> ";
-        curr = curr->next;
-    }
-    cout << endl;
-}
-
-static nodeP10 *split(nodeP10 *head) {
-    nodeP10 *fast = head;
-    nodeP10 *slow = head;
-
-    while (fast && fast->next) {
-        fast = fast->next->next;
-        if (fast) {
-            slow = slow->next;
-        }
-    }
-
-    nodeP10 *temp = slow->next;
-    slow->next = NULL;
-    return temp;
-}
-
-
-static nodeP10 *merge(nodeP10 *first, nodeP10 *second) {
-    if (!first) {
-        return second;
-    }
-
-    if (!second) {
-        return first;
-    }
-
-    if (first->value <= second->value) {
-        first->next = merge(first->next, second);
-        return first;
-    }
-    else {
-        second->next = merge(first, second->next);
-        return second;
-    }
-}
-
-
-static int getSize(nodeP10 *head) {
-    int count = 0;
-    while (head) {
-        count++;
+void printFun(nodeP10* head)
+{
+    while (head)
+    {
+        cout << head->data << " -> ";
         head = head->next;
     }
-    return count;
+    cout << "NULL\n";
 }
 
+bool isSorted(nodeP10* head)
+{
+    while (head && head->next)
+    {
+        if (head->data > head->next->data)
+            return false;
 
-// totalSize is not modified, it is just there for
-// checking if sorting is done halfway.
-static nodeP10 *mergeSort(nodeP10 *head, int totalSize) {
-    // Base case: if the list is empty or has only one node, 
-    // it's already sorted
-    if (head == NULL || head->next == NULL)
-        return head;
-    
-    nodeP10 *second = split(head);
-    
-    head = mergeSort(head, totalSize);
-    second = mergeSort(second, totalSize);
-
-    if (getSize(head) == totalSize / 2 || getSize(second) == totalSize / 2) {
-        cout << "Halfway sorted." << endl;
-
-        // This part will connect the two parts.
-        nodeP10 *f = head;
-        while (f) {
-            if (f->next == NULL) {
-                f->next = second;
-                break;
-            }
-            f = f->next;
-        }
-        return head;
+        head = head->next;
     }
-    
-    return merge(head, second);
+    return true;
 }
 
 
-void showP10() {
-    nodeP10 *first = NULL;
+nodeP10* findMid(nodeP10* head)
+{
+    nodeP10* slow = head;
+    nodeP10* fast = head->next;
 
-    insertNode(&first, 9);
-    insertNode(&first, 8);
-    insertNode(&first, 5);
-    insertNode(&first, 2);
+    while (fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+    return slow;
+}
 
-    first = mergeSort(first, 4);
 
-    printList(first);
+nodeP10* merge(nodeP10* a, nodeP10* b)
+{
+    if (!a) return b;
+    if (!b) return a;
+
+    if (a->data <= b->data)
+    {
+        a->next = merge(a->next, b);
+        return a;
+    }
+    else
+    {
+        b->next = merge(a, b->next);
+        return b;
+    }
+}
+
+
+nodeP10* mergeSort(nodeP10* head)
+{
+    if (!head || !head->next)
+        return head;
+
+    // Optimization
+    if (isSorted(head))
+        return head;
+
+    nodeP10* mid = findMid(head);
+    nodeP10* right = mid->next;
+    mid->next = nullptr;
+
+    nodeP10* left = mergeSort(head);
+    nodeP10* sortedRight = mergeSort(right);
+
+    return merge(left, sortedRight);
+}
+
+void showP10()
+{
+    nodeP10* head = nullptr;
+
+    insertFun(head, 3);
+    insertFun(head, 2);
+    insertFun(head, 1);
+    insertFun(head, 4);
+    insertFun(head, 5);
+
+    cout << "Original List:\n";
+    printFun(head);
+
+    head = mergeSort(head);
+
+    cout << "\nSorted List:\n";
+    printFun(head);
 }

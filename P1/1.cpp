@@ -1,44 +1,43 @@
 #include <iostream>
-#include <vector>
-#include "show-pset1.h"
 using namespace std;
 
+void rotateOnce (int arr[], int n, int idx, int last)
+{
+	if (idx == 0)
+	{
+		arr[0] = last;
+		return;
+	}
+	
+	arr[idx] = arr[idx - 1];
+	rotateOnce(arr, n, idx - 1, last);
+}
 
-static void rotate(vector<int>& arr, int index, int valueAtIndex, int rotateBy) {
-    if (rotateBy == 0) {
-        return;
-    }
-
-    if (rotateBy < 0) { 
-        cout << "Invalid rotate-by." << endl;
-        return;
-    }
-    
-    if (index >= arr.size())
-        return;
-
-    rotate(arr, index + 1, arr[index + 1], rotateBy);
-
-    int i = index + rotateBy;
-    if (i >= arr.size()) {
-        i = i % arr.size();
-    }
-    arr[i] = valueAtIndex;
+void rotateRight (int arr[], int n, int k)
+{
+	if (k == 0) return;
+	
+	int last = arr[n - 1];
+	
+	rotateOnce(arr, n, n - 1, last);
+	rotateRight(arr, n, k - 1);
 }
 
 
 void showP1() {
-    vector<int> array = {1, 2, 3, 4, 5};
+    int arr[] = {1, 2, 3, 4, 5};
 
     cout << "Original array: ";
-    for (int e: array) {
-        cout << e << ", "; 
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << ", ";
     }
+    cout << endl;
 
-    rotate(array, 0, array[0], 2);
-    
-    cout << endl << "After Rotated right by 2: ";
-    for (int e: array) {
-        cout << e << ", "; 
+    rotateRight(arr, 5, 2);
+
+    cout << "After rotating right by 2: ";
+    for (int i = 0; i < 5; i++) {
+        cout << arr[i] << ", ";
     }
+    cout << endl;
 }

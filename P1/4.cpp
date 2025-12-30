@@ -1,148 +1,114 @@
 #include <iostream>
-#include <utility>
-#include <stack>
-#include "show-pset1.h"
 using namespace std;
 
-struct nodeP4 {
-    int value;
-    nodeP4 *next;
+struct nodeP4
+{
+    int data;
+    nodeP4* next;
 
-    nodeP4(int v) {
-        value = v;
-        next = NULL;
+    nodeP4(int d)
+    {
+        data = d;
+        next = nullptr;
     }
 };
 
+nodeP4* reverse(nodeP4* head)
+{
+    nodeP4* prev = nullptr;
+    nodeP4* curr = head;
+    nodeP4* next = nullptr;
 
-static int getSize(nodeP4 *head) {
-    int size = 0;
-    while (head) {
-        size++;
-        head = head->next;
+    while (curr != nullptr)
+    {
+        next = curr->next;   // save -> next
+        curr->next = prev;   // reverse -> link
+        prev = curr;         // move -> prev
+        curr = next;         // move -> curr
     }
-
-    return size;
+    return prev;
 }
 
-static pair<nodeP4 *, nodeP4 *> midsplit(nodeP4 *head, int size) {
-    nodeP4 *current = head;
-    nodeP4 *secondPart = NULL;
-    for (int i = 1; i <= ((size - 1) / 2); i++) {
-        // if (i == 0) {
-        //     current = head;
-        //     continue;
-        // }
-        // cout << "Adding " << current->value << endl;
-        current = current->next;
+bool isPalindrome(nodeP4* head)
+{
+    if (!head || !head->next)
+        return true;
+
+    nodeP4* slow = head;
+    nodeP4* fast = head;
+
+    while (fast->next && fast->next->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
     }
-    secondPart = current->next;
-    current->next = NULL;
-    
-    return {head, secondPart};
+
+    nodeP4* secondHalf = reverse(slow->next);
+    nodeP4* firstHalf = head;
+
+    nodeP4* temp = secondHalf;
+    bool result = true;
+
+    while (temp)
+    {
+        if (firstHalf->data != temp->data)
+        {
+            result = false;
+            break;
+        }
+        firstHalf = firstHalf->next;
+        temp = temp->next;
+    }
+
+    slow->next = reverse(secondHalf);
+
+    return result;
 }
 
-
-static void insertNode(nodeP4 **head, int v) {
-    nodeP4 *newnode = new nodeP4(v);
-    if (*head == NULL) {
-        *head = newnode;
+void insertEnd(nodeP4*& head, int value)
+{
+    nodeP4* newNode = new nodeP4(value);
+    if (!head)
+    {
+        head = newNode;
         return;
     }
 
-    else {
-        nodeP4 *current = *head;
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newnode;
-    }
+    nodeP4* temp = head;
+    while (temp->next)
+        temp = temp->next;
+
+    temp->next = newNode;
 }
 
-static void reverse(nodeP4 *head) {
-    nodeP4 *current = head;
-    stack<int> s;
-    while (current) {
-        s.push(current->value);
-        current = current->next;
+void printList(nodeP4* head)
+{
+    while (head)
+    {
+        cout << head->data << " -> ";
+        head = head->next;
     }
-    current = head;
-    while (!s.empty()) {
-        current->value = s.top();
-        s.pop();
-        current = current->next;
-    }
+    cout << "NULL\n";
 }
 
-static bool compareLists(nodeP4 *one, nodeP4 *two) {
-    while (one && two) {
-        if (one->value != two->value) {
-            return false;
-        }
-        one = one->next;
-        two = two->next;
-    }
+void showP4()
+{
+    nodeP4* head = nullptr;
 
-    if (one || two) {
-        return false;
-    }
+    insertEnd(head, 1);
+    insertEnd(head, 3);
+    insertEnd(head, 7);
+    insertEnd(head, 3);
+    insertEnd(head, 1);
 
-    return true;
-}
-
-
-static void printList(nodeP4 *head) {
-    while (head) {
-        cout << head->value << " -> ";
-        head=head->next;
-    }
-}
-
-void showP4() {
-    nodeP4 *head = NULL;
-    int size = 5;
-
-    insertNode(&head, 1);
-    insertNode(&head, 3);
-    insertNode(&head, 7);
-    insertNode(&head, 3);
-    insertNode(&head, 1);
-    
-    cout << "Original list: ";
+    cout << "Linked List: ";
     printList(head);
-    cout << endl;
 
-    pair<nodeP4 *, nodeP4 *> splitted = midsplit(head, size);
-    nodeP4 *firstPart = splitted.first;
-    nodeP4 *secondPart = splitted.second;
+    if (isPalindrome(head))
+        cout << "Palindrome List\n";
+    else
+        cout << "Not a Palindrome\n";
 
-    nodeP4 *secondStart = NULL;
-
-    if (size % 2 != 0) {
-        nodeP4 *current = firstPart;
-        while (current && current->next) {
-            current = current->next;
-        }
-
-        secondStart = new nodeP4(current->value);
-        secondStart->next = secondPart;
-        secondPart = secondStart;
-    }
-
-    reverse(secondPart);
-
-    // cout << endl;
-    // cout << endl;
-    // cout << endl;
-    // printList(firstPart);
-    // cout << endl;
-    // printList(secondPart);
-    // cout << endl;
-    
-    if (compareLists(firstPart, secondPart)) {
-        cout << "Yes, given list is palindrome." << endl;
-    }
-    else {
-        cout << "Not a palindrome." << endl;
-    }
+    cout << "List after check (restored): ";
+    printList(head);
 }

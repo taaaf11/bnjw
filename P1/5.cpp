@@ -1,82 +1,118 @@
 #include <iostream>
-#include "show-pset1.h"
 using namespace std;
 
-
 struct nodeP5 {
-    int value;
-    nodeP5 *next;
-
-    nodeP5(int v) {
-        value = v;
-        next = NULL;
-    }
+	int data;
+	nodeP5* next;
+	
+	nodeP5(int d) : data(d), next(nullptr) {
+	}
 };
 
-static void insertNode(nodeP5 **head, int v) {
-    nodeP5 *newnode = new nodeP5(v);
-    if (*head == NULL) {
-        *head = newnode;
+// nodeP5* head = NULL;
+// nodeP5* tail = NULL;
+
+static nodeP5* mergeSorted(nodeP5* a, nodeP5* b)
+{
+    // EDGE CASES
+    if (!a) return b;
+    if (!b) return a;
+
+    nodeP5* head = nullptr;
+    nodeP5* tail = nullptr;
+
+    // Initialize head
+    if (a->data <= b->data)
+    {
+        head = tail = a;
+        a = a->next;
+    }
+    else
+    {
+        head = tail = b;
+        b = b->next;
+    }
+
+    // Merge by pointer relinking
+    while (a && b)
+    {
+        if (a->data <= b->data)
+        {
+            tail->next = a;   // relink
+            a = a->next;
+        }
+        else
+        {
+            tail->next = b;   // relink
+            b = b->next;
+        }
+        tail = tail->next;
+    }
+
+    // Attach remaining nodes
+    tail->next = (a) ? a : b;
+
+    return head;
+}
+
+
+static void insertEnd(nodeP5*& head, int price)
+{
+    nodeP5* newNode = new nodeP5(price);
+    if (!head)
+    {
+        head = newNode;
         return;
     }
 
-    else {
-        nodeP5 *current = *head;
-        while (current->next) {
-            current = current->next;
-        }
-        current->next = newnode;
-    }
+    nodeP5* temp = head;
+    while (temp->next)
+        temp = temp->next;
+
+    temp->next = newNode;
 }
 
-static void createSorted(nodeP5 *first, nodeP5 *second) {
-    nodeP5 *parent = NULL;
-
-    while (first) {
-        while (second && second->value < first->value) {
-            nodeP5 *temp = second->next;
-
-            second->next = first;
-            parent->next = second;
-            
-            parent = first;
-            first = second;
-            second = temp;
-        }
-        parent = first;
-        first = first->next;
+static void printList(nodeP5* head)
+{
+    while (head)
+    {
+        cout << head->data << " ? ";
+        head = head->next;
     }
+    cout << "NULL\n";
 }
 
-static void printList(nodeP5 *head) {
-    while (head) {
-        cout << head->value << " -> ";
-        head=head->next;
-    }
+
+static void printFun(nodeP5* &head)
+{
+	while(head)
+	{
+		cout << head->next << endl;
+		head = head->next;
+	}
 }
 
-void showP5() {
-    nodeP5 *first = NULL;
-    nodeP5 *second = NULL;
+void showP5()
+{
+    nodeP5* A = nullptr;
+    nodeP5* B = nullptr;
 
-    insertNode(&first, 1);
-    insertNode(&first, 5);
-    insertNode(&first, 6);
-    insertNode(&first, 7);
+    insertEnd(A, 1);
+    insertEnd(A, 5);
+    insertEnd(A, 7);
 
-    insertNode(&second, 2);
-    insertNode(&second, 3);
-    insertNode(&second, 4);
+    insertEnd(B, 2);
+    insertEnd(B, 3);
+    insertEnd(B, 6);
 
-    cout << "First list: ";
-    printList(first);
-    cout << endl << "Second list: ";
-    printList(second);
+    cout << "Company A: ";
+    printList(A);
 
-    
-    createSorted(first, second);
+    cout << "Company B: ";
+    printList(B);
 
-    cout << endl << "Sorted: ";
-    printList(first);
-    cout << endl;
+    nodeP5* merged = mergeSorted(A, B);
+
+    cout << "Merged Prices: ";
+    printList(merged);
 }

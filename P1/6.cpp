@@ -31,26 +31,33 @@ static void insertNode(nodeP6 **head, char v) {
 }
 
 
-static bool algorithm(nodeP6 *l) {
-    if (l == NULL) {
-        return false;
+static nodeP6* findLoopStart(nodeP6* head)
+{
+    nodeP6* slow = head;
+    nodeP6* fast = head;
+
+    // Phase 1: Detect cycle
+    while (fast && fast->next)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+            break;
+    }
+    if (fast == nullptr || fast->next == nullptr)
+        return nullptr;
+
+    // Phase 2: Find loop start
+    slow = head;
+
+    while (slow != fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
     }
 
-    nodeP6 *tortoise = l;
-    nodeP6 *hare = l;
-
-    while (hare && hare->next) {
-        if (hare == tortoise) {
-            return true;
-        }
-        // if (hare->next == tortoise || hare->next->next == tortoise) {
-        //     return true;
-        // }
-        hare = hare->next->next;
-        tortoise = tortoise->next;
-    }
-
-    return false;
+    return slow;
 }
 
 void showP6() {
@@ -65,12 +72,12 @@ void showP6() {
     //make C apear after E
     head->next->next->next->next->next = head->next->next;
 
-    bool hasCycles = algorithm(head);
+    nodeP6* cycleStarts = findLoopStart(head);
 
     cout << "The list is: " << "A -> " << "B -> " << "C -> " << "D -> " << "E -> " << "C -> ..." << endl;
 
-    if (hasCycles) {
-        cout << "The cycle is detected." << endl;
+    if (cycleStarts) {
+        cout << "The cycle is detected at " << cycleStarts->value << endl;
     }
     else {
         cout << "The cycle is not there." << endl;
