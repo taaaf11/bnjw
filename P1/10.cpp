@@ -108,7 +108,7 @@ static nodeP10 *mergeSort(nodeP10 *head, int totalSize) {
     head = mergeSort(head, totalSize);
     second = mergeSort(second, totalSize);
 
-    if (getSize(head) == totalSize / 2) {
+    if (getSize(head) == totalSize / 2 || getSize(second) == totalSize / 2) {
         cout << "Halfway sorted." << endl;
 
         // cout << "First half: ";
