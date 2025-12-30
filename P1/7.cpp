@@ -34,37 +34,26 @@ static void removeConsecutives(nodeP7 *head, int k) {
     int i = 0;
     nodeP7 *parent = NULL;
     nodeP7 *current = head;
-    nodeP7 *seqStart = NULL;
+    nodeP7 *seqParent = NULL;
 
     while (current) {
         if (current->value == 0) {
             i += 1;
-            if (!seqStart)
-                seqStart = parent;
-                // seqStart = current;
-
-            parent  = current;
-            current = current->next;
-            continue;
+            if (!seqParent)
+                seqParent = parent;
         }
+        else {
+            if (i >= k) {
+                seqParent->next = current;
+                parent = seqParent;
+            }
 
-        if (i >= k) {
             i = 0;
-            seqStart->next = current;
-            seqStart = NULL;
-            parent = current;
-            if (current)
-                current = current->next;
+            seqParent = NULL;
         }
-        
-        // if (i == k) {
-        //     i = 0;
 
-        //     parent->
-        // }
-        parent = current;
-        if (current)
-            current = current->next;
+        parent  = current;
+        current = current->next;
     }
 }
 
@@ -86,6 +75,7 @@ void showP7() {
     insertNode(&head, 0);
     insertNode(&head, 0);
     insertNode(&head, 0);
+    insertNode(&head, 0);
     insertNode(&head, 1);
 
     cout << "Before: ";
@@ -93,6 +83,6 @@ void showP7() {
 
     removeConsecutives(head, 5);
 
-    cout << endl << "After removing 5 consecutive absents: ";
+    cout << endl << "After removing 5 (or more) consecutive absents: ";
     printList(head);
 }
