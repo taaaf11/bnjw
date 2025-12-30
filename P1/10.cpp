@@ -93,11 +93,6 @@ static int getSize(nodeP10 *head) {
 // totalSize is not modified, it is just there for
 // checking if sorting is done halfway.
 static nodeP10 *mergeSort(nodeP10 *head, int totalSize) {
-
-    // chahray pe bhikhray muskurahaten khonay na den
-    // har lamhay ko narmi se tham le
-
-    
     // Base case: if the list is empty or has only one node, 
     // it's already sorted
     if (head == NULL || head->next == NULL)
@@ -110,11 +105,6 @@ static nodeP10 *mergeSort(nodeP10 *head, int totalSize) {
 
     if (getSize(head) == totalSize / 2 || getSize(second) == totalSize / 2) {
         cout << "Halfway sorted." << endl;
-
-        // cout << "First half: ";
-        // printList(head);
-        // cout << endl << "Second half: ";
-        // printList(second);
 
         // This part will connect the two parts.
         nodeP10 *f = head;

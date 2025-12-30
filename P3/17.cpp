@@ -42,7 +42,7 @@ int getSize(nodeP17 *head) {
 }
 
 
-int finder(nodeP17 *head, int nth) {
+static int finder(nodeP17 *head, int nth) {
     int totalSize = getSize(head);
     
     if (nth > totalSize || nth <= 0) {

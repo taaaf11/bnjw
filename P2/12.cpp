@@ -59,9 +59,7 @@ static void paransChecker(string expr) {
                 exit(1);
             }
             
-            if (
-                c != getClosing(s.top())
-            )
+            if (c != getClosing(s.top()))
             {
                 cout << "Expected " << getClosing(s.top()) << ", found " << c << endl;
             }
