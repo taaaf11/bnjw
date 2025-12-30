@@ -1,31 +1,37 @@
-objects :=  P3/16.o \
-			P3/17.o \
-			P3/18.o \
-			P3/19.o \
-			P3/20.o \
-			P2/11.o \
-			P2/12.o \
-			P2/13.o \
-			P2/14.o \
-			P2/15.o \
-			P1/1.o \
-			P1/2.o \
-			P1/3.o \
-			P1/4.o \
-			P1/5.o \
-			P1/6.o \
-			P1/7.o \
-			P1/8.o \
-			P1/9.o \
-			P1/10.o
+CXXFLAGS := -ggdb
 
-main.exe: $(objects) main.cpp
+P1_sources := $(wildcard P1/*.cpp)
+P1_objs := $(P1_sources:%.cpp=%.o)
+P1_deps := $(P1_objs:%.o=%.d)
+
+P2_sources := $(wildcard P2/*.cpp)
+P2_objs := $(P2_sources:%.cpp=%.o)
+P2_deps := $(P2_objs:%.o=%.d)
+
+P3_sources := $(wildcard P3/*.cpp)
+P3_objs := $(P3_sources:%.cpp=%.o)
+P3_deps := $(P3_objs:%.o=%.d)
+
+main.exe: $(P1_objs) $(P2_objs) $(P3_objs) main.cpp
 	g++ $^ -o main.exe -ggdb
 
-$(objects): %.o : %.cpp
-	g++ -c $^ -o $@ -ggdb
+$(P1_objs): %.o : %.cpp
+	g++  -c $^ -o $@  $(CXXFLAGS) -MMD -MP -MF ${@:.o=.d}
+
+$(P2_objs): %.o : %.cpp
+	g++  -c $^ -o $@  $(CXXFLAGS) -MMD -MP -MF ${@:.o=.d}
+
+$(P3_objs): %.o : %.cpp
+	g++  -c $^ -o $@   $(CXXFLAGS) -MMD -MP -MF ${@:.o=.d}
+
+-include $(P1_deps)
+-include $(P2_deps)
+-include $(P3_deps)
 
 clean:
 	rm P1/*.o
+	rm P1/*.d
 	rm P2/*.o
+	rm P2/*.d
 	rm P3/*.o
+	rm P3/*.d
