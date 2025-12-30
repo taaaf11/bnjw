@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void rotateOnce (int arr[], int n, int idx, int last)
+static void rotateOnce (int arr[], int n, int idx, int last)
 {
 	if (idx == 0)
 	{
@@ -13,7 +13,7 @@ void rotateOnce (int arr[], int n, int idx, int last)
 	rotateOnce(arr, n, idx - 1, last);
 }
 
-void rotateRight (int arr[], int n, int k)
+static void rotateRight (int arr[], int n, int k)
 {
 	if (k == 0) return;
 	
