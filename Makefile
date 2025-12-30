@@ -20,10 +20,10 @@ objects :=  P3/16.o \
 			P1/10.o
 
 main.exe: $(objects) main.cpp
-	g++ $^ -o main.exe
+	g++ $^ -o main.exe -ggdb
 
 $(objects): %.o : %.cpp
-	g++ -c $^ -o $@
+	g++ -c $^ -o $@ -ggdb
 
 clean:
 	rm P1/*.o
