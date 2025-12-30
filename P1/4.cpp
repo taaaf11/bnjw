@@ -13,7 +13,7 @@ struct nodeP4
     }
 };
 
-nodeP4* reverse(nodeP4* head)
+static nodeP4* reverse(nodeP4* head)
 {
     nodeP4* prev = nullptr;
     nodeP4* curr = head;
@@ -29,7 +29,7 @@ nodeP4* reverse(nodeP4* head)
     return prev;
 }
 
-bool isPalindrome(nodeP4* head)
+static bool isPalindrome(nodeP4* head)
 {
     if (!head || !head->next)
         return true;
@@ -65,7 +65,7 @@ bool isPalindrome(nodeP4* head)
     return result;
 }
 
-void insertEnd(nodeP4*& head, int value)
+static void insertEnd(nodeP4*& head, int value)
 {
     nodeP4* newNode = new nodeP4(value);
     if (!head)
@@ -81,7 +81,7 @@ void insertEnd(nodeP4*& head, int value)
     temp->next = newNode;
 }
 
-void printList(nodeP4* head)
+static void printList(nodeP4* head)
 {
     while (head)
     {
