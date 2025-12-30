@@ -55,48 +55,65 @@ struct Deque
 
     int removeFront() {
         if (!head) {
-            throw runtime_error("Queue is empty.");
+            throw runtime_error("Dequeue is empty.");
         }
 
-        if (head == tail) {
-            int value = head->value;
-            delete head;
-            head = tail = NULL;
-            cout << "Deleting " << value << " at front." << endl;
-            return value;
+        if (tail == head) {
+            tail = NULL;
         }
 
         nodeP9 *temp = head;
+
         int value = head->value;
+        cout << "Deleting " << value << " at front." << endl;
+
         head = head->next;
         delete temp;
-        cout << "Deleting " << value << " at front." << endl;
+        
         return value;
     }
 
     int removeRear() {
-        if (!head) {
-            throw runtime_error("Queue is empty.");
+        if (!tail) {
+            throw runtime_error("Dequeue is empty.");
         }
 
-        
         if (head == tail) {
-            int value = head->value;
-            delete head;
+            int value = tail->value;
+            delete tail;
             head = tail = NULL;
             cout << "Deleting " << value << " at rear" << endl;
             return value;
         }
 
-        nodeP9 *temp = head;
-        while (temp && temp->next  != tail) {
-            temp = temp->next;
-        }
-        int value = tail->value;
-        cout << "Deleting " << value << " at rear" << endl;
+        else {
+            nodeP9 *temp = head;
+            while (temp && temp->next  != tail) {
+                temp = temp->next;
+            }
+            int value = tail->value;
+            cout << "Deleting " << value << " at rear" << endl;
 
-        delete tail;
-        temp = temp;
+            delete tail;
+            tail = temp;
+
+            return value;
+        }
+    }
+
+
+    int front() {
+        if (!head) {
+            throw runtime_error("Dequeue is empty.");
+        }
+        return head->value;
+    }
+
+    int rear() {
+        if (!tail) {
+            throw runtime_error("Dequeue is empty.");
+        }
+        return tail->value;
     }
 };
 
