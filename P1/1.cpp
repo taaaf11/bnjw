@@ -1,4 +1,5 @@
 #include <iostream>
+#include "show-pset1.h"
 using namespace std;
 
 static void rotateOnce (int arr[], int n, int idx, int last)
