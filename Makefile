@@ -13,7 +13,7 @@ P3_objs := $(P3_sources:%.cpp=%.o)
 P3_deps := $(P3_objs:%.o=%.d)
 
 main.exe: $(P1_objs) $(P2_objs) $(P3_objs) main.cpp
-	g++ $^ -o main.exe -ggdb
+	g++ $^ -o main.exe $(CXXFLAGS)
 
 $(P1_objs): %.o : %.cpp
 	g++  -c $^ -o $@  $(CXXFLAGS) -MMD -MP -MF ${@:.o=.d}
